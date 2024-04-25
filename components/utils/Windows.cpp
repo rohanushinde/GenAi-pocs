@@ -304,7 +304,7 @@ Function Name	:	AdjustTempValue()
 
 Description		:	This function upon calling sets the offset and gain to adjust the temperature analysis.
 
-Setup			:	Connect a temperature adapter box to PMI. Connect the 30/47ºC simulator to the temperature
+Setup			:	Connect a temperature adapter box to PMI. Connect the 30/47ÂºC simulator to the temperature
 					adapter box. While in the Review screen select the "Setup" button.
 
 Testing			:	___1. Select the setup button and verify the cathmap window is displayed.
