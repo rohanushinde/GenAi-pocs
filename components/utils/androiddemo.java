@@ -1,26 +1,26 @@
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.ImageView;
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import android.telephony.TelephonyManager
 
-public class ThemedIconActivity extends Activity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_themed_icon);
-
-        // Get the ImageView for the app icon
-        ImageView appIconImageView = findViewById(R.id.app_icon_image_view);
-
-        // Set the app icon to a themed version (light or dark)
-        int appIconResId = isDarkTheme() ? R.drawable.ic_dark_app_icon : R.drawable.ic_light_app_icon;
-        appIconImageView.setImageResource(appIconResId);
+fun getDeviceImei(context: Context): String? {
+    // This function works on Android 11 and below
+    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
+        val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        return telephonyManager.deviceId
+    } else {
+        // For Android 13 and above, this function will not work
+        return null
     }
+}
 
-    // Example method to check if the current theme is dark
-    private boolean isDarkTheme() {
-        // Implement your logic here (e.g., check system settings or app theme)
-        // Return true if dark theme, false otherwise
-        return /* your implementation */;
+// New function introduced in Android 13
+fun getDeviceImeiAndroid13(context: Context): String? {
+    // Check if the READ_PRIVILEGED_PHONE_STATE permission is granted
+    if (context.checkSelfPermission(Manifest.permission.READ_PRIVILEGED_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+        val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        return telephonyManager.getImei()
     }
+    return null
 }
